@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}" />
+     <title>Hello Django from firstapp dolder</title>
+</head>
+<body>
+    <h1>Home.html</h1>
+    <h2> from firstapp folder!</h2>
+
+    <p>{% now "Y" %}</p>
+    <p>{% now "F j Y" %}</p>
+    <p>{% now "N, j, Y" %}</p>
+    <p>{% now "N j, Y, P, e" %}</p>
+    <p>{% now "r" %}</p>
+
+
+    <h1>Another image</h1>
+
+    <img src="{% static "pyramid.png" %}" alt="My image">
+    <br>
+
+<!-- Символ "Y" передает год в виде четырех цифр,
+ "y" - берет из года последние две цифры.
+  "F" - полное название месяца,
+   "N" -сокращенное название месяца. "j" - день месяца. "P" - время.
+-->
+
+     <a href="http://localhost:8000/about">about</a>
+
+
+
+    <p><a href="http://localhost:8000/contact">contact</a></p>
+
+
+
+
+
+</body>
+</html>

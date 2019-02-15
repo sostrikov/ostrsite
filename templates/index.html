@@ -1,0 +1,78 @@
+{% extends "firstapp/base.html" %}
+
+
+{% block content %}
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+</head>
+<body>
+
+<div class="container">
+  <h2>Шаблон Index</h2>
+  <p>The .table-hover class enables a hover state on table rows:</p>
+
+  <form method="POST">
+    {% csrf_token %}
+  <table>
+    {{ form }}
+  </table>
+  <input type="submit" value="Send" >
+
+  <table id="Example" class="table table-hover" data-pagination="true">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<select class="form-control" name="state" id="maxRows">
+	  <option value="5000">Show ALL Rows</option>
+	  <option value="2">2</option>
+	  <option value="10">10</option>
+	  <option value="15">15</option>
+	  <option value="20">20</option>
+	  <option value="50">50</option>
+	  <option value="70">70</option>
+	  <option value="100">100</option>
+</select>
+<script src="js/js.js"></script>
+{% endblock content %}

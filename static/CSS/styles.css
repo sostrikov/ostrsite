@@ -1,0 +1,9 @@
+body
+{
+background-color: darkred; /* Фон страницы будет черным */
+color: white; /* Текст страницы будет белым */
+}
+h1{color:crimson;}
+h3{color: #ffffff;}
+h2{color: darkcyan}
+img{width:350px;}
