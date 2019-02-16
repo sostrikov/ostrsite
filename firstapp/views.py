@@ -1,10 +1,22 @@
 from django.shortcuts import render
 from .forms import UserForm
+from django.template.loader import get_template
+#from django.template import Context
+import datetime
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect
-
+from django.shortcuts import render_to_response
 
 # Create your views here.
-
+'''
+def current_datetime(request):
+    now = datetime.datetime.now()
+    t = get_template('current_datetime.html')
+    html = t.render(Context({'current_date': now}))
+    return HttpResponse(html)
+'''
+def current_datetime(request):
+    now = datetime.datetime.now()
+    return render(request, "firstapp/current_datetime.html", {"current_date": now})
 
 def index(request):
     if request.method == "POST":
