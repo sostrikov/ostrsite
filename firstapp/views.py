@@ -5,7 +5,7 @@ from django.template.loader import get_template
 import datetime
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.shortcuts import render_to_response
-
+import pytz
 # Create your views here.
 '''
 def current_datetime(request):
@@ -16,7 +16,8 @@ def current_datetime(request):
 '''
 def current_datetime(request):
     now = datetime.datetime.now()
-    return render(request, "firstapp/current_datetime.html", {"current_date": now})
+    test2 = pytz.timezone('Europe/Moscow').localize( now )
+    return render(request, "firstapp/current_datetime.html", {"current_date": test2})
 
 def index(request):
     if request.method == "POST":
