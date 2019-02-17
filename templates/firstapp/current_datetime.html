@@ -5,6 +5,7 @@
     <title>Current datetime</title>
 </head>
 <body>
-<p>It is now {{ current_date }}.</p>
+<p>It is now {{ current_date | date:"N j, o" }} - {{ current_date | time:"P"}}.</p>
+<p>Текущее время {{ current_date |date:'d-m-Y H:i' }}.</p>
 </body>
 </html>

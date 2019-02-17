@@ -17,7 +17,8 @@ def current_datetime(request):
 def current_datetime(request):
     now = datetime.datetime.now()
     test2 = pytz.timezone('Europe/Moscow').localize( now )
-    return render(request, "firstapp/current_datetime.html", {"current_date": test2})
+    formatedDate = test2.strftime("%Y-%m-%d %H:%M:%S")
+    return render(request, "firstapp/current_datetime.html", {"current_date": now})
 
 def index(request):
     if request.method == "POST":
