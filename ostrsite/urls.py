@@ -26,8 +26,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('about/', TemplateView.as_view(template_name="firstapp/about.html",
         extra_context={"header": "Словарь, который можно передать в шаблон"})),
-    path('contact', TemplateView.as_view(template_name="firstapp/contact.html")),
+    path('contact/', TemplateView.as_view(template_name="firstapp/contact.html")),
     path('details/', views.details),
+    path('current_datetime/', views.current_datetime),
 
     #re_path(r'^products/$', views.products),
     #re_path(r'^products/(?P<productid>\d+)/', views.products),

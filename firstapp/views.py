@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from .forms import UserForm
+from django.template.loader import get_template
+#from django.template import Context
+import datetime
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect
+<<<<<<< HEAD
 from django.template import Context, Template
 from django.utils import timezone
 from django.utils.timezone import localtime, get_current_timezone, datetime
@@ -9,6 +13,23 @@ import pytz
 
 # Create your views here. {"form": userform},
 tz = localtime()
+=======
+from django.shortcuts import render_to_response
+import pytz
+# Create your views here.
+'''
+def current_datetime(request):
+    now = datetime.datetime.now()
+    t = get_template('current_datetime.html')
+    html = t.render(Context({'current_date': now}))
+    return HttpResponse(html)
+'''
+def current_datetime(request):
+    now = datetime.datetime.now()
+    test2 = pytz.timezone('Europe/Moscow').localize( now )
+    formatedDate = test2.strftime("%Y-%m-%d %H:%M:%S")
+    return render(request, "firstapp/current_datetime.html", {"current_date": now})
+>>>>>>> 9647702b60734ed6e41524ebd9bd24fdc3ccee7e
 
 def index(request):
     if request.method == "POST":
