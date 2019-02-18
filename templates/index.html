@@ -12,7 +12,14 @@
 
 <div class="container">
   <h2>Шаблон Index</h2>
-  <p>The .table-hover class enables a hover state on table rows:</p>
+  <p>LocalTime: {% load tz %}{{ tz }}</p>
+
+  <p>{{ header }}</p>
+  <p>Имя: {{ user.name}}</p>
+  <p> Возраст: {{user.age}}</p>
+  <p>Адрес: ул. {{address.0}}, д. {{address.1}}, кв. {{address.2}}</p>
+  <p>Языки: {{langs.0}}, {{langs.1}}, {{langs.2}}</p>
+<p>{{ load local }}</p>
 
   <form method="POST">
     {% csrf_token %}

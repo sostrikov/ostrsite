@@ -41,6 +41,7 @@ urlpatterns = [
     path('users/<int:id>/<str:name>/', views.users),
 
     path('products/<int:productid>/', views.products),
+    path('main/', views.main),
 
 
 
