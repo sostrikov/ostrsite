@@ -3,7 +3,7 @@ from .forms import UserForm
 from django.template.loader import get_template
 #from django.template import Context
 import datetime
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect, HttpResponseNotFound
 from django.template import Context, Template
 from django.utils import timezone
 from django.utils.timezone import localtime, get_current_timezone, datetime
@@ -11,7 +11,54 @@ import pytz
 
 
 # Create your views here. {"form": userform},
-tz = localtime()
+#==Работаем с БД==========
+from .models import Person
+
+
+# получение данных из бд
+def index(request):
+    people = Person.objects.all()
+    return render(request, "index.html", {"people": people})
+
+
+# сохранение данных в бд
+def create(request):
+    if request.method == "POST":
+        person = Person()
+        person.name = request.POST.get("name")
+        person.age = request.POST.get("age")
+        person.save()
+    return HttpResponseRedirect("/")
+
+
+# изменение данных в бд
+def edit(request, id):
+    try:
+        person = Person.objects.get(id=id)
+
+        if request.method == "POST":
+            person.name = request.POST.get("name")
+            person.age = request.POST.get("age")
+            person.save()
+            return HttpResponseRedirect("/")
+        else:
+            return render(request, "firstapp/edit.html", {"person": person})
+    except Person.DoesNotExist:
+        return HttpResponseNotFound("<h2>Person not found</h2>")
+
+
+# удаление данных из бд
+def delete(request, id):
+    try:
+        person = Person.objects.get(id=id)
+        person.delete()
+        return HttpResponseRedirect("/")
+    except Person.DoesNotExist:
+        return HttpResponseNotFound("<h2>Person not found</h2>")
+
+
+
+
 from django.shortcuts import render_to_response
 import pytz
 # Create your views here.
@@ -27,7 +74,7 @@ def current_datetime(request):
     test2 = pytz.timezone('Europe/Moscow').localize( now )
     formatedDate = test2.strftime("%Y-%m-%d %H:%M:%S")
     return render(request, "firstapp/current_datetime.html", {"current_date": now})
-
+'''
 def index(request):
     if request.method == "POST":
         name = request.POST.get("name")
@@ -43,7 +90,7 @@ def index(request):
         data = {"header": header, "langs": langs, "user": user, "address": addr}
         #data = {"header": "Hello Django", "message": "Welcome to Python"}
         return render(request, "index.html", context=data)
-
+'''
 def parse_timestamp(n):
     naive = datetime.datetime.fromtimestamp(int(n))
     # FIXME: what timezone is it really?

@@ -8,3 +8,4 @@ class Person(models.Model):
     age = models.IntegerField()
     image = models.ImageField()
     date = models.DateTimeField(auto_now_add=True, blank=True)
+

@@ -12,74 +12,34 @@
 
 <div class="container">
   <h2>Шаблон Index</h2>
-  <p>LocalTime: {% load tz %}{{ tz }}</p>
-
-  <p>{{ header }}</p>
-  <p>Имя: {{ user.name}}</p>
-  <p> Возраст: {{user.age}}</p>
-  <p>Адрес: ул. {{address.0}}, д. {{address.1}}, кв. {{address.2}}</p>
-  <p>Языки: {{langs.0}}, {{langs.1}}, {{langs.2}}</p>
-<p>{{ data }}</p>
-
-  <form method="POST">
-    {% csrf_token %}
-  <table>
-    {{ form }}
-  </table>
-  <input type="submit" value="Send" >
-
-  <table id="Example" class="table table-hover" data-pagination="true">
-    <thead>
-      <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 
 
-<select class="form-control" name="state" id="maxRows">
-	  <option value="5000">Show ALL Rows</option>
-	  <option value="2">2</option>
-	  <option value="10">10</option>
-	  <option value="15">15</option>
-	  <option value="20">20</option>
-	  <option value="50">50</option>
-	  <option value="70">70</option>
-	  <option value="100">100</option>
-</select>
-<script src="js/js.js"></script>
+ <form method="POST" action="create/">
+        {% csrf_token %}
+        <p>
+            <label>Введите имя:</label><br>
+            <input type="text" name="name" />
+        </p>
+        <p>
+            <label>Введите возраст</label><br>
+            <input type="number" name="age" />
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+    {% if people.count >= 0 %}
+    <h2>Список пользователей</h2>
+    <table class="table table-hover">
+        <thead><th>Id</th><th>Имя</th><th>Возраст</th><th>Дата</th><th>Действия</th></thead>
+        {% for person in people %}
+        <tr>
+            <td>{{ person.id }}</td>
+            <td>{{ person.name }}</td>
+            <td>{{ person.age }}</td>
+            <td>{{ person.date | date:'d-m-Y H:i'}}</td>
+            <td><a href="edit/{{person.id}}">Изменить</a> | <a href="delete/{{person.id}}">Удалить</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    {% endif %}
 {% endblock content %}
